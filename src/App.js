@@ -1,40 +1,36 @@
 import React from "react";
 import "./App.css";
-import List from "./components/List";
-import ListItem from "./components/ListItem";
-import ListItemText from "./components/ListItemText";
-import ListItemIcon from "./components/ListItemIcon";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import Items from "./pages/Items";
+import Pokemons from "./pages/Pokemons";
 
 function App() {
   return (
-    <div className="app">
-      <header>
-        Pokedex <input />
-      </header>
-      <main className="colorful-border">
-        <List>
-          <ListItem href="#bulbasaur">
-            <ListItemIcon
-              src="https://img.pokemondb.net/artwork/large/bulbasaur.jpg"
-              alt="Picture of Bulbasaur"
-            />
-            <ListItemText primary="Bulbasaur" secondary="#001" />
-            <ListItemIcon
-              src="https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/fire.svg"
-              alt="Picture of Bulbasaur"
-            />
-          </ListItem>
-          <ListItem href="#ivysaur">
-            <ListItemIcon
-              src="https://img.pokemondb.net/artwork/large/ivysaur.jpg"
-              alt="Picture of Ivysaur"
-            />
-            <ListItemText primary="Ivysaur" secondary="#002" />
-          </ListItem>
-        </List>
-      </main>
-      <footer>Footer</footer>
-    </div>
+    <Router>
+      <div className="app">
+        <Switch>
+          <Route path="/pokemons/: name">
+            <Pokemons />
+          </Route>
+          <Route path="/items">
+            <Items />
+          </Route>
+          <Route path="/">
+            <Redirect to="/pokemons" />
+          </Route>
+        </Switch>
+        <footer>
+          <Link to="/pokemons">Pokemons</Link>
+          <Link to="/items">Items</Link>
+        </footer>
+      </div>
+    </Router>
   );
 }
 
